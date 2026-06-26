@@ -1,6 +1,8 @@
 package ru.solar.marketapp;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements  ItemClickListener{
     RecyclerView recyclerView;
     List<Item> itemList;
     MyAdapter myAdapter;
@@ -51,5 +53,12 @@ public class MainActivity extends AppCompatActivity {
 
         myAdapter = new MyAdapter(itemList);
         recyclerView.setAdapter(myAdapter);
+
+        myAdapter.setClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v, int pos) {
+        Toast.makeText(this, "Your choose: " + itemList.get(pos).getItemName(), Toast.LENGTH_SHORT).show();
     }
 }
